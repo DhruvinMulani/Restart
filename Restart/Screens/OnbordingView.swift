@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct OnbordingView: View {
+    //MARK: property
+    
+    @AppStorage("onbording") var isOnbordingViewActive: Bool = true
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("Onbording")
+                .font(.largeTitle)
+            
+            Button(action:{
+isOnbordingViewActive = false
+            }) {
+                Text("Start")
+            }
+        }
     }
 }
 
