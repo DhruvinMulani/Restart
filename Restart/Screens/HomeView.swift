@@ -11,6 +11,7 @@ struct HomeView: View {
     //MARK: property
 
     @AppStorage("onbording") var isOnbordingViewActive: Bool = false
+    @State private var isAnimating :Bool = false
 
     var body: some View {
         VStack(spacing:20){
@@ -19,12 +20,21 @@ struct HomeView: View {
             Spacer()
             ZStack {
                 CircleGroupView(ShapeColor: .gray, ShapeOpacity: 0.1)
-
                 Image("character-2")
                     .resizable()
                     .scaledToFit()
-                .padding()
+                    .padding()
+                    .offset(y:isAnimating ? 75 : -75)
+               
+                    .animation(
+                        Animation
+                            .easeOut(duration: 4)
+                            .repeatForever()
+                        , value: isAnimating
+                    )
             }
+            
+                
             //MARK:- Center
             Text("The time that leads to mastery is dependent on the intensity of our foucs.")
                 .font(.title3)
@@ -35,7 +45,9 @@ struct HomeView: View {
             //MARK:- Footer
             Spacer()
             Button(action: {
-                isOnbordingViewActive = true
+                withAnimation{
+                    isOnbordingViewActive = true
+                }
             }){
                 Image(systemName: "arrow.triangle.2.circlepath.circle.fill")
                     .imageScale(.large)
@@ -47,7 +59,13 @@ struct HomeView: View {
             .buttonBorderShape(.capsule)
             .controlSize(.large)
             
+            
         }//:Vstack
+        .onAppear(perform: {
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
+                isAnimating = true
+            })
+        })
     }
 }
 

@@ -11,12 +11,19 @@ struct OnbordingView: View {
     //MARK: property
     
     @AppStorage("onbording") var isOnbordingViewActive: Bool = true
+    
+    @State private var buttonWidth: Double = UIScreen.main.bounds.width-80
+    @State private var buttonOffSet: CGFloat = 0
+    @State private var isAnimating: Bool = true
+    @State private var imageOffset: CGSize = .zero
+    
     var body: some View {
+        
         ZStack {
             Color("ColorBlue")
                 .ignoresSafeArea (.all, edges: .all)
             VStack(spacing:20){
-                //MARK:- Header
+                //MARK: - Header
                 Spacer()
                 
                 VStack(spacing:0){
@@ -29,26 +36,47 @@ struct OnbordingView: View {
                     It's not hopw much we give but
                     how much love we put into giving.
                     """)
-                        .font(.title3)
-                        .fontWeight(.light)
-                        .multilineTextAlignment(.center)
-                        .foregroundColor(.white)
-                        .padding(.horizontal,10)
-                }
-                
-                //MARK:- Center
+                    .font(.title3)
+                    .fontWeight(.light)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(.white)
+                    .padding(.horizontal,10)
+                }//:header
+                .opacity(isAnimating ? 1 : 0 )
+                .offset(y: isAnimating ? 0 : -40)
+                .animation(.easeOut(duration: 1), value: isAnimating)
+                //MARK: - Center
                 
                 ZStack{
                     CircleGroupView(ShapeColor: .white, ShapeOpacity: 0.20)
-                   //: ZSTACK
+                        .offset(x:imageOffset.width * -1)
+                        .blur(radius: abs(imageOffset.width/5))
+                        .animation(.easeOut(duration: 1), value: imageOffset)
+                    //: ZSTACK
                     
                     Image("character-1")
                         .resizable()
                         .scaledToFit()
-                                    }//: Center
+                        .opacity(isAnimating ? 1 : 0)
+                        .animation(.easeOut(duration: 0.5), value: isAnimating)
+                        .offset(x: imageOffset.width * 1.2, y : 0)
+                        .rotationEffect(.degrees(Double(imageOffset.width/20)))                        .gesture(DragGesture()
+                            .onChanged{ gesture in
+                                if abs(imageOffset.width) <= 150 {
+                                    imageOffset = gesture.translation
+
+                                }
+                            }
+                            .onEnded{ _  in
+                                imageOffset = .zero
+
+                            }
+                        )
+                        .animation(.easeOut(duration: 1), value: imageOffset)
+                }//: Center
                 
                 Spacer()
-                //MARK:- Footer
+                //MARK: - Footer
                 
                 ZStack{
                     //1. Background (Static)
@@ -70,7 +98,7 @@ struct OnbordingView: View {
                     HStack{
                         Capsule()
                             .fill(Color("ColorRed"))
-                            .frame(width: 80)
+                            .frame(width: buttonOffSet + 80)
                         
                         Spacer()
                     }
@@ -79,7 +107,7 @@ struct OnbordingView: View {
                     HStack {
                         ZStack{
                             Circle()
-                                .fill(Color("ColorRed")) 
+                                .fill(Color("ColorRed"))
                             
                             Circle()
                                 .fill(.black.opacity(0.15))
@@ -89,23 +117,44 @@ struct OnbordingView: View {
                             
                         }
                         .foregroundColor(.white)
-                    .frame(width: 80,height: 80,alignment: .center)
-                    .onTapGesture {
-                        isOnbordingViewActive=false
+                        .frame(width: 80,height: 80,alignment: .center)
+                        .offset(x:buttonOffSet)
+                        .gesture(
+                            DragGesture()
+                                .onChanged{gesture in
+                                    if gesture.translation.width > 0 && buttonOffSet <=
+                                    buttonWidth - 80{
+                                        buttonOffSet = gesture.translation.width
+                                    }
+                                }
+                                .onEnded{ _ in
+                                    withAnimation(Animation.easeOut(duration: 0.4)){
+                                        if buttonOffSet > buttonWidth / 2{
+                                            buttonOffSet = buttonWidth - 80
+                                            isOnbordingViewActive = false
+                                        }
+                                        else{
+                                            buttonOffSet = 0}
+                                    }
+                                    }
+                            )//: Gesture
+                                Spacer()
                     }
-                        
-                        Spacer()
-                    }
-                    
-                    
-                    
-                }//:Footer
-                .frame(height: 80, alignment: .center)
-                .padding()
-            }//:Vstack
-        }//:Zstack
+                    }//:Footer
+                    .frame(width: buttonWidth,height: 80, alignment: .center)
+                    .padding()
+                    .opacity(isAnimating ? 1 : 0)
+                    .offset(y:isAnimating ? 0 : 40)
+                    .animation(.easeOut(duration: 1), value: isAnimating)
+                                   }//:Vstack
+            }//:Zstack
+          .onAppear(perform: {
+            isAnimating = true
+            
+        })
+        }
     }
-}
+
 
 #Preview {
     OnbordingView()
