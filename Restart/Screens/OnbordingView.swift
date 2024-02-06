@@ -19,6 +19,8 @@ struct OnbordingView: View {
     @State private var indicatorOpacity: Double = 1.0
     @State private var textTitle: String = "Share."
     
+    let hapticFeedback = UINotificationFeedbackGenerator()
+    
     var body: some View {
         
         ZStack {
@@ -150,10 +152,13 @@ struct OnbordingView: View {
                                 .onEnded{ _ in
                                     withAnimation(Animation.easeOut(duration: 0.4)){
                                         if buttonOffSet > buttonWidth / 2{
+                                            playSound(sound: "chimeup", type: "mp3")
+                                            hapticFeedback.notificationOccurred(.success)
                                             buttonOffSet = buttonWidth - 80
                                             isOnbordingViewActive = false
                                         }
                                         else{
+                                            hapticFeedback.notificationOccurred(.warning)
                                             buttonOffSet = 0}
                                     }
                                     }
@@ -172,6 +177,7 @@ struct OnbordingView: View {
             isAnimating = true
             
         })
+          .preferredColorScheme(.dark)
         }
     }
 
