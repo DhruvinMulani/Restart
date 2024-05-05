@@ -12,5 +12,5 @@
 
 ## Video
 
-"https://github.com/DhruvinMulani/Restart/raw/main/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a.mp4"
+https://github.com/DhruvinMulani/Restart/raw/main/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a.mp4
 
