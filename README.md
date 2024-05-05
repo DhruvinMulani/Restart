@@ -8,12 +8,7 @@
       <td width="1%"><img src="https://github.com/DhruvinMulani/Restart/assets/84307576/f0038236-376a-44b2-982d-440b77e38545"/></td>
             <td width="1%"><img src="https://github.com/DhruvinMulani/Restart/assets/84307576/6bfe5f6f-e368-46d8-affd-66849db64e66"/></td>
       
-    </tr>
-    <tr>
-      
-      
-    </tr>
-  
+    
   </tbody>
 </table>
 
