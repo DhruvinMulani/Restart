@@ -15,7 +15,7 @@
 ## Video
 
 
-https://github.com/DhruvinMulani/Restart/assets/84307576/ae443133-df4b-46dd-b734-7caf213d0c07)
+[Watch the video]https://github.com/DhruvinMulani/Restart/assets/84307576/ae443133-df4b-46dd-b734-7caf213d0c07
 
 
 
