@@ -12,7 +12,5 @@
 
 ## Video
 
-<video width="320" height="240" controls autoplay>
-  <source src="https://github.com/DhruvinMulani/Restart/raw/main/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+"https://github.com/DhruvinMulani/Restart/raw/main/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a.mp4"
+
