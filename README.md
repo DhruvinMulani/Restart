@@ -15,8 +15,9 @@
 ## Video
 
 
-[Watch the video]https://github.com/DhruvinMulani/Restart/assets/84307576/ae443133-df4b-46dd-b734-7caf213d0c07
+[Watch the video]https://github.com/DhruvinMulani/Restart/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a
 
-
-
-</table>
+<video width="320" height="240" autoplay>
+  <source src="https://github.com/DhruvinMulani/Restart/assets/84307576/614ed351-5556-426a-b7d7-081377083c1a" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
